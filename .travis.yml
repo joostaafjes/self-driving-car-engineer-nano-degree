@@ -1,0 +1,17 @@
+language: python
+python:
+- 3.5
+script:
+- pytest -v
+env:
+  global:
+    secure: PBd6XgSGNfPTBsWp86ss7XWZ46CduJtzTma76xnRQJcXhbHC0xpEaVjRK+Leh6p5nMLQQFu1Md8F+jomYqmhN0Z33ZSyk6OJBmc+NULvi3UFyNjhOJdTWOWm1IrXjlonQoC1jEoUjvnIvedJwEWeEaj4JzBtXj0dCpWDOVBZbpkVXdH6Exmq3G//9rstm/9g6uVNjRQlIeRNRkVgV94dS0TXG2rYfPq5clAUYl7++HrSCeFUi7sRZcQSsn3sCYqSN9hfgtHbiagycLS8ea8OBvMNIhrYDRJ/IOt+i4W45FtDxuPzBY8tARP0aoerf3PLDO6ptsowi/14F/sg6Bsv6BOdXs/MyHvei/Bo3pQ2hb01+L8gIDEcMYyd9ZJznNUfBJPGGiNHlgUyI8bQ1rgfTvreqReVlA5RMApoAV2ZDJ9I2tSLj7++waQFV/ZX0byfjVIl/qX1vHJdjI3KzNHmvo5C850HkXLYNaEFI21ULSeUL01w7m4gQdmMKg1AoD70C3WdL8EXWq3rv4Oa+cd7XYolwwIAboeXun1Ci8an1/5C7z66y+dcmZRr52aRaUaZ/I5dRau45f2WcteNooabYreYcD6Bguqxy56pgthr2aO7c7pB002vM69E0pKdrIDRQtgFbV4H3ErPIKUV/m5Zf8OOSUKccjZTGYAJ5N8jTyM=
+
+addons:
+  sonarcloud:
+    organization: "joostaafjes-github" # the key of the org you chose at step #3
+    token:
+      secure: "icsQ83c3FzByj7U/p1dwm2xfvg/APwUwSC0GYdx3IIL3/ZGdKXhOG0SdJY1kY4g9e8kfZZooBu8BnbneYydIb1olPR6nSvfN2CsS/JU/4MRS1R+yM7uZGhnJ2GLm3g+oavBsFixK3Qdk0QpPBuquG1z+QTzWIff5gmmhAX92x+9K0UwblD+lw4H3ONhyKS5URF/8Hc4BJTP7Hujyyb+rU551191r9Xxy8gTDLrvsDscgI0I2aXQZskjcSkgkTKmLLAlmN7cLN92yVf899iaHX5/xjM4PF8vtr0P8B1l8bJgE4kSE+BKSIBAIG1wKWmrSdYkkHS1vzv3765M0VajWfSsHYrGmz7gknUm05E1rO+Pn/8/hpYm/Sn9Y4IDqrwaGooZCeJEMNNZOoMMmQssZ/yJ952LOKk4utJ2cfvaFCI0e0G/rtpGW1rxpTN9N5zdwKpYXd8q3V/q7N9tY6eqII1XGHy3pIrvR9UKakbitWbn3C2zLr/YNwyhTqj5e2A7aoZ8fN4DxPtpksyVqUJCx1R5chv9LLLtf/MPor7Jlqm4l/CHcJKIHyUh6+kcYaSkLc6spT8iEr8otnpWqDYD2ukb24HG5esv3x3LcXIio08+4TLq4gXVq0iJfp+Id95qR655M6GteuYH1N58APXzEloBnBO7O9AaBFve5mJlNHPE="
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
