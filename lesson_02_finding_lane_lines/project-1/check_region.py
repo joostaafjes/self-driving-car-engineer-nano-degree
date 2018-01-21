@@ -4,7 +4,8 @@ import numpy as np
 
 plt.ion()
 # Read in the image
-image = mpimg.imread('test.jpg')
+#image = mpimg.imread('test.jpg')
+image = mpimg.imread('solidWhiteCurve-in.jpg')
 
 # Grab the x and y size and make a copy of the image
 ysize = image.shape[0]
@@ -14,9 +15,9 @@ line_image = np.copy(image)
 
 # Define color selection criteria
 # MODIFY THESE VARIABLES TO MAKE YOUR COLOR SELECTION
-red_threshold = 200
-green_threshold = 200
-blue_threshold = 200
+red_threshold = 0
+green_threshold = 0
+blue_threshold = 0
 
 rgb_threshold = [red_threshold, green_threshold, blue_threshold]
 
@@ -27,6 +28,8 @@ rgb_threshold = [red_threshold, green_threshold, blue_threshold]
 left_bottom = [0, 539]
 right_bottom = [954, 539]
 apex = [464, 325]
+
+
 
 # Perform a linear fit (y=Ax+B) to each of the three sides of the triangle
 # np.polyfit returns the coefficients [A, B] of the fit

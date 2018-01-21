@@ -58,9 +58,41 @@ lines = cv2.HoughLinesP(masked_edges, rho, theta, threshold, np.array([]),
                             min_line_length, max_line_gap)
 
 # Iterate over the output "lines" and draw lines on a blank image
+
+left_x = []
+left_y = []
+right_x = []
+right_y = []
 for line in lines:
-    for x1,y1,x2,y2 in line:
-        cv2.line(line_image,(x1,y1),(x2,y2),(255,0,0),10)
+    for x1, y1, x2, y2 in line:
+        rc = (y2 - y1) / (x2 - x1)
+        if rc < 0:
+            left_x.append(x1)
+            left_x.append(x2)
+            left_y.append(y1)
+            left_y.append(y2)
+        else:
+            right_x.append(x1)
+            right_x.append(x2)
+            right_y.append(y1)
+            right_y.append(y2)
+
+max_y = imshape[0]
+max_x = imshape[1]
+left_a, left_b = np.polyfit(left_x, left_y, 1)
+left_y1 = max_y
+left_x1 = int((left_y1 - left_b) / left_a)
+left_y2 = 290
+left_x2 = int((left_y2 - left_b) / left_a)
+cv2.line(line_image, (left_x1, left_y1), (left_x2, left_y2), (255,0,0), 10)
+
+right_a, right_b = np.polyfit(right_x, right_y, 1)
+right_y1 = max_y
+right_x1 = int((right_y1 - right_b) / right_a)
+right_y2 = 290
+right_x2 = int((right_y2 - right_b) / right_a)
+cv2.line(line_image, (right_x1, right_y1), (right_x2, right_y2), (255,0,0), 10)
+
 
 # Create a "color" binary image to combine with line image
 color_edges = np.dstack((edges, edges, edges))
