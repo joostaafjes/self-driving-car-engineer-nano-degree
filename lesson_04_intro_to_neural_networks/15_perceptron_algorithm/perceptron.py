@@ -48,7 +48,7 @@ def perceptron_step(X, y, W, b, learn_rate=0.01):
 # for plotting purposes.
 # Feel free to play with the learning rate and the num_epochs,
 # and see your results plotted below.
-def trainPerceptron_algorithm(X, y, learn_rate=0.01, num_epochs=100):
+def train_perceptron_algorithm(X, y, learn_rate=0.01, num_epochs=100):
     x_min, x_max = min(X.T[0]), max(X.T[0])
     y_min, y_max = min(X.T[1]), max(X.T[1])
     W = np.array(np.random.rand(2, 1))
