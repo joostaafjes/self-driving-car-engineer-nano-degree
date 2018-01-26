@@ -40,7 +40,8 @@ for input_image_name in input_images_names:
         image = mpimg.imread(input_image_name)
         imshape = image.shape
 
-        vertices = np.array([[(0,imshape[0]),(460, 330), (510, 330), (imshape[1],imshape[0])]], dtype=np.int32)
+        vertices = np.array([[(0,imshape[0]),(430, 340), (530, 340), (imshape[1],imshape[0])]], dtype=np.int32)
         image_mask = region_of_interest(image, vertices)
         plt.imshow(image_mask, cmap='gray')
+        plt.show()
         # input('press enter...')
