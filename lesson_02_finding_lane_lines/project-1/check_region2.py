@@ -36,7 +36,6 @@ for input_image_name in input_images_names:
     if input_image_name.endswith("jpg"):
 
         print('process file %s' % input_image_name)
-        #image = mpimg.imread('test.jpg')
         image = mpimg.imread(input_image_name)
         imshape = image.shape
 

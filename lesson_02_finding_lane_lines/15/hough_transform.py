@@ -17,14 +17,10 @@ blur_gray = cv2.GaussianBlur(gray,(kernel_size, kernel_size),0)
 low_threshold = 50
 high_threshold = 150
 edges = cv2.Canny(blur_gray, low_threshold, high_threshold)
-# plt.imshow(edges, cmap='Greys_r')
-# plt.show()
 
 # Next we'll create a masked edges image using cv2.fillPoly()
 mask = np.zeros_like(edges)
 ignore_mask_color = 255
-# plt.imshow(mask, cmap='Greys_r')
-# plt.show()
 
 # This time we are defining a four sided polygon to mask
 imshape = image.shape
@@ -37,16 +33,11 @@ vertices = np.array([[(bot_hor_dist,imshape[0]),
                       (imshape[1] - bot_hor_dist,imshape[0])]], dtype=np.int32)
 cv2.fillPoly(mask, vertices, ignore_mask_color)
 masked_edges = cv2.bitwise_and(edges, mask)
-# plt.imshow(masked_edges, cmap='Greys_r')
-# plt.show()
 
 # Define the Hough transform parameters
 # Make a blank the same size as our image to draw on
 rho = 1 # distance resolution in pixels of the Hough grid
 theta = np.pi/180 # angular resolution in radians of the Hough grid
-# for threshold in range(10):
-#     for min_line_length in range(5, 15):
-#         for max_line_gap in range(1, 10):
 threshold = 10     # minimum number of votes (intersections in Hough grid cell)
 min_line_length = 30 #minimum number of pixels making up a line
 max_line_gap = 20    # maximum gap in pixels between connectable line segments

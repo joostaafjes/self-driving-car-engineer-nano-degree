@@ -1,4 +1,4 @@
-def perceptronStep(X, y, W, b, learn_rate = 0.01):
+def perceptron_step(X, y, W, b, learn_rate = 0.01):
     for i in range(len(X)):
         y_hat = prediction(X[i],W,b)
         if y[i]-y_hat == 1:

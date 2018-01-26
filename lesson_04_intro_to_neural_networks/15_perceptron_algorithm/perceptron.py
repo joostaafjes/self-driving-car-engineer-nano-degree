@@ -7,7 +7,7 @@ import matplotlib.animation as animation
 np.random.seed(42)
 
 
-def stepFunction(t):
+def step_function(t):
     if t >= 0:
         return 1
     return 0
@@ -15,14 +15,14 @@ def stepFunction(t):
 
 def prediction(X, W, b):
     # print(X)
-    return stepFunction((np.matmul(X, W) + b)[0])
+    return step_function((np.matmul(X, W) + b)[0])
 
 
 # The function should receive as inputs the data X, the labels y,
 # the weights W (as an array), and the bias b,
 # update the weights and bias W, b, according to the perceptron algorithm,
 # and return W and b.
-def perceptronStep(X, y, W, b, learn_rate=0.01):
+def perceptron_step(X, y, W, b, learn_rate=0.01):
     # Fill in code
     update_cnt = 0
     for i in range(len(X)):
@@ -48,7 +48,7 @@ def perceptronStep(X, y, W, b, learn_rate=0.01):
 # for plotting purposes.
 # Feel free to play with the learning rate and the num_epochs,
 # and see your results plotted below.
-def trainPerceptronAlgorithm(X, y, learn_rate=0.01, num_epochs=100):
+def trainPerceptron_algorithm(X, y, learn_rate=0.01, num_epochs=100):
     x_min, x_max = min(X.T[0]), max(X.T[0])
     y_min, y_max = min(X.T[1]), max(X.T[1])
     W = np.array(np.random.rand(2, 1))
@@ -60,7 +60,7 @@ def trainPerceptronAlgorithm(X, y, learn_rate=0.01, num_epochs=100):
     neurons_updated = []
     for i in range(num_epochs):
         # In each epoch, we apply the perceptron step.
-        W, b, nn_updated = perceptronStep(X, y, W, b, learn_rate)
+        W, b, nn_updated = perceptron_step(X, y, W, b, learn_rate)
         boundary_lines.append((-W[0] / W[1], -b / W[1]))
         neurons_updated.append(nn_updated)
     return boundary_lines, neurons_updated
@@ -71,7 +71,7 @@ y = data[:, -1]
 
 num_epochs=50
 for learn_rate in np.arange(0.01, 0.10, 0.01):
-    boundary_lines, neurons_updated = trainPerceptronAlgorithm(X, y, learn_rate, num_epochs)
+    boundary_lines, neurons_updated = train_perceptron_algorithm(X, y, learn_rate, num_epochs)
 
     # set up figure and animation
     fig = plt.figure()
