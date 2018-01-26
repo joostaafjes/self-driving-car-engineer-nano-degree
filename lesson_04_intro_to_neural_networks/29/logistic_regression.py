@@ -1,77 +1,81 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import time
 import matplotlib.animation as animation
-
 # Setting the random seed, feel free to change it and see different solutions.
 np.random.seed(42)
 
-
-def step_function(t):
-    if t >= 0:
-        return 1
-    return 0
-
-
+def sigmoid(x):
+    return 1/(1+np.exp(-x))
+def sigmoid_prime(x):
+    return sigmoid(x)*(1-sigmoid(x))
 def prediction(X, W, b):
-    # print(X)
-    return step_function((np.matmul(X, W) + b)[0])
+    return sigmoid(np.matmul(X,W)+b)
+def error_vector(y, y_hat):
+    return [-y[i]*np.log(y_hat[i]) - (1-y[i])*np.log(1-y_hat[i]) for i in range(len(y))]
+def error(y, y_hat):
+    ev = error_vector(y, y_hat)
+    return sum(ev)/len(ev)
 
+# TODO: Fill in the code below to calculate the gradient of the error function.
+# The result should be a list of three lists:
+# The first list should contain the gradient (partial derivatives) with respect to w1
+# The second list should contain the gradient (partial derivatives) with respect to w2
+# The third list should contain the gradient (partial derivatives) with respect to b
+def dErrors(X, y, y_hat):
+    DErrorsDx1 = [-X[i][0] * (y[i] - y_hat[i]) for i in range(len(y))]
+    DErrorsDx2 = [-X[i][1] * (y[i] - y_hat[i]) for i in range(len(y))]
+    DErrorsDb = [-(y[i] - y_hat[i]) for i in range(len(y))]
+    return DErrorsDx1, DErrorsDx2, DErrorsDb
 
+# TODO: Fill in the code below to implement the gradient descent step.
 # The function should receive as inputs the data X, the labels y,
-# the weights W (as an array), and the bias b,
-# update the weights and bias W, b, according to the perceptron algorithm,
-# and return W and b.
-def perceptron_step(X, y, W, b, learn_rate=0.01):
-    # Fill in code
-    update_cnt = 0
-    for i in range(len(X)):
-        result = prediction(X[i], W, b)
-        # print('before: %s - %s' % (W, b))
-        if result < y[i]:
-            W[0] += X[i][0] * learn_rate
-            W[1] += X[i][1] * learn_rate
-            b += learn_rate
-            update_cnt += 1
-        if result > y[i]:
-            W[0] -= X[i][0] * learn_rate
-            W[1] -= X[i][1] * learn_rate
-            b = b - learn_rate
-            update_cnt += 1
-        # print('after: %s - %s' % (W, b))
-    print('update_cnt: %d' % update_cnt)
+# the weights W (as an array), and the bias b.
+# It should calculate the prediction, the gradients, and use them to
+# update the weights and bias W, b. Then return W and b.
+# The error e will be calculated and returned for you, for plotting purposes.
+def gradientDescentStep(X, y, W, b, learn_rate = 0.01):
+     # Calculate the prediction
+     y_hat = prediction(X, W, b)
+     # Calculate the gradient
+     DErrorsDx1, DErrorsDx2, DErrorsDb = dErrors(X, y, y_hat)
+     # Update the weights
+     W[0] -= sum(DErrorsDx1) * learn_rate
+     W[1] -= sum(DErrorsDx2) * learn_rate
+     b -= sum(DErrorsDb) * learn_rate
 
-    return W, b, update_cnt
+     # This calculates the error
+     e = error_vector(y, y_hat)
+     return W, b, sum(e)
 
 # This function runs the perceptron algorithm repeatedly on the dataset,
 # and returns a few of the boundary lines obtained in the iterations,
 # for plotting purposes.
 # Feel free to play with the learning rate and the num_epochs,
 # and see your results plotted below.
-def train_perceptron_algorithm(X, y, learn_rate=0.01, num_epochs=100):
+def trainLR(X, y, learn_rate = 0.01, num_epochs = 100):
     x_min, x_max = min(X.T[0]), max(X.T[0])
     y_min, y_max = min(X.T[1]), max(X.T[1])
-    W = np.array(np.random.rand(2, 1))
-    # print(W)
-    b = np.random.rand(1)[0] + x_max
-    # print(b)
+    # Initialize the weights randomly
+    W = np.array(np.random.rand(2,1))*2 -1
+    b = np.random.rand(1)[0]*2 - 1
     # These are the solution lines that get plotted below.
     boundary_lines = []
-    neurons_updated = []
+    errors = []
     for i in range(num_epochs):
-        # In each epoch, we apply the perceptron step.
-        W, b, nn_updated = perceptron_step(X, y, W, b, learn_rate)
-        boundary_lines.append((-W[0] / W[1], -b / W[1]))
-        neurons_updated.append(nn_updated)
-    return boundary_lines, neurons_updated
+        # In each epoch, we apply the gradient descent step.
+        W, b, error = gradientDescentStep(X, y, W, b, learn_rate)
+        boundary_lines.append((-W[0]/W[1], -b/W[1]))
+        errors.append(error)
+    return boundary_lines, errors
 
+# read file
 data =  np.genfromtxt('data.csv', delimiter=',')
 X = data[:, :-1]
 y = data[:, -1]
 
-num_epochs=100
+num_epochs=50
 for learn_rate in np.arange(0.01, 0.10, 0.01):
-    boundary_lines, neurons_updated = train_perceptron_algorithm(X, y, learn_rate, num_epochs)
+    boundary_lines, neurons_updated = trainLR(X, y, learn_rate, num_epochs)
 
     # set up figure and animation
     fig = plt.figure()
@@ -122,7 +126,7 @@ for learn_rate in np.arange(0.01, 0.10, 0.01):
 
 
     nn_animation = animation.FuncAnimation(fig, animate, frames=num_epochs,
-                                  interval=200, blit=True, init_func=init)
+                                           interval=200, blit=True, init_func=init)
 
     # save file
     filename = 'nn_%02d_%0.2f.mp4' % (num_epochs, learn_rate)
