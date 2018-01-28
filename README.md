@@ -8,8 +8,8 @@ Excercises done for the course Self-Driving Car Engineer at Udacity
 
 1. Simple perceptron algorithm
 
-[![Simple perceptron algorithm](https://img.youtube.com/vi/B6y3ywvn2B0/0.jpg)](https://www.youtube.com/watch?v=https://youtu.be/B6y3ywvn2B0)
+[![Simple perceptron algorithm](https://img.youtube.com/vi/B6y3ywvn2B0/0.jpg)](https://www.youtube.com/watch?v=B6y3ywvn2B0)
 
 2. Logistic regression algorithm
 
-[![Logistic regression algorithm](https://img.youtube.com/vi/Spmd29yHGoE/0.jpg)](https://www.youtube.com/watch?v=https://youtu.be/Spmd29yHGoE)
+[![Logistic regression algorithm](https://img.youtube.com/vi/Spmd29yHGoE/0.jpg)](https://www.youtube.com/watch?v=Spmd29yHGoE)
