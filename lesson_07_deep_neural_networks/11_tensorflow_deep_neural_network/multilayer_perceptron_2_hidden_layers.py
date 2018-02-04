@@ -13,14 +13,17 @@ n_input = 784  # MNIST data input (img shape: 28*28)
 n_classes = 10  # MNIST total classes (0-9 digits)
 
 n_hidden_layer = 256 # layer number of features
+n_hidden_layer2 = 1000 # layer number of features
 
 # Store layers weight & bias
 weights = {
     'hidden_layer': tf.Variable(tf.random_normal([n_input, n_hidden_layer])),
-    'out': tf.Variable(tf.random_normal([n_hidden_layer, n_classes]))
+    'hidden_layer2': tf.Variable(tf.random_normal([n_hidden_layer, n_hidden_layer2])),
+    'out': tf.Variable(tf.random_normal([n_hidden_layer2, n_classes]))
 }
 biases = {
     'hidden_layer': tf.Variable(tf.random_normal([n_hidden_layer])),
+    'hidden_layer2': tf.Variable(tf.random_normal([n_hidden_layer2])),
     'out': tf.Variable(tf.random_normal([n_classes]))
 }
 
@@ -33,8 +36,13 @@ x_flat = tf.reshape(x, [-1, n_input])
 # Hidden layer with RELU activation
 layer_1 = tf.add(tf.matmul(x_flat, weights['hidden_layer']), biases['hidden_layer'])
 layer_1 = tf.nn.relu(layer_1)
+
+# Hidden layer with RELU activation
+layer_2 = tf.add(tf.matmul(layer_1, weights['hidden_layer2']), biases['hidden_layer2'])
+layer_2 = tf.nn.relu(layer_2)
+
 # Output layer with linear activation
-logits = tf.matmul(layer_1, weights['out']) + biases['out']
+logits = tf.matmul(layer_2, weights['out']) + biases['out']
 
 # Define loss and optimizer
 cost = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(logits=logits, labels=y))
@@ -69,25 +77,25 @@ with tf.Session() as sess:
     test_size = 256
     print("Accuracy:", accuracy.eval({x: mnist.test.images[:test_size], y: mnist.test.labels[:test_size]}))
 
-# Epoch: 0001 cost= 25.325351715
-# Epoch: 0002 cost= 27.190023422
-# Epoch: 0003 cost= 20.226074219
-# Epoch: 0004 cost= 15.261500359
-# Epoch: 0005 cost= 11.176329613
-# Epoch: 0006 cost= 7.236722946
-# Epoch: 0007 cost= 8.415687561
-# Epoch: 0008 cost= 6.885296345
-# Epoch: 0009 cost= 14.242617607
-# Epoch: 0010 cost= 8.450067520
-# Epoch: 0011 cost= 7.099008560
-# Epoch: 0012 cost= 14.989990234
-# Epoch: 0013 cost= 3.853459358
-# Epoch: 0014 cost= 6.897451401
-# Epoch: 0015 cost= 13.762220383
-# Epoch: 0016 cost= 4.994157791
-# Epoch: 0017 cost= 9.055945396
-# Epoch: 0018 cost= 9.330004692
-# Epoch: 0019 cost= 6.096240520
-# Epoch: 0020 cost= 7.319509029
+# Epoch: 0001 cost= 40.944545746
+# Epoch: 0002 cost= 72.104400635
+# Epoch: 0003 cost= 45.755962372
+# Epoch: 0004 cost= 50.222465515
+# Epoch: 0005 cost= 34.239189148
+# Epoch: 0006 cost= 15.705960274
+# Epoch: 0007 cost= 25.236467361
+# Epoch: 0008 cost= 17.968246460
+# Epoch: 0009 cost= 8.179350853
+# Epoch: 0010 cost= 10.124277115
+# Epoch: 0011 cost= 2.415088654
+# Epoch: 0012 cost= 26.906364441
+# Epoch: 0013 cost= 6.422560215
+# Epoch: 0014 cost= 2.281178474
+# Epoch: 0015 cost= 19.817771912
+# Epoch: 0016 cost= 2.553707123
+# Epoch: 0017 cost= 0.000000000
+# Epoch: 0018 cost= 7.930575371
+# Epoch: 0019 cost= 19.007942200
+# Epoch: 0020 cost= 2.013186932
 # Optimization Finished!
-# Accuracy: 0.83984375
+# Accuracy: 0.9609375
