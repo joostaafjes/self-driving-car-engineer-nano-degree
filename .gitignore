@@ -3,3 +3,4 @@
 *.pyc
 lesson_07_deep_neural_networks/**/*gz
 lesson_07_deep_neural_networks/**/data/
+lesson_08_convolutional_nn/**/*gz
