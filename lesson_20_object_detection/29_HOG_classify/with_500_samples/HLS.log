@@ -1,0 +1,23 @@
+Start processing for colorspace HLS ...
+Colorspace: HLS channel:   2 Using: 6 orientations 14 pixels per cell and 3 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel:   1 Using: 7 orientations 15 pixels per cell and 2 cells per block Test Accuracy of SVC , 0.99
+Colorspace: HLS channel: ALL Using: 10 orientations 4 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 10 orientations 6 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 11 orientations 4 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 11 orientations 7 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.99
+Colorspace: HLS channel: ALL Using: 12 orientations 4 pixels per cell and 3 cells per block Test Accuracy of SVC , 0.995
+Colorspace: HLS channel: ALL Using: 12 orientations 6 pixels per cell and 3 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 12 orientations 15 pixels per cell and 4 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 14 orientations 6 pixels per cell and 4 cells per block Test Accuracy of SVC , 0.99
+Colorspace: HLS channel: ALL Using: 15 orientations 4 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.995
+Colorspace: HLS channel: ALL Using: 15 orientations 6 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 15 orientations 9 pixels per cell and 3 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 16 orientations 4 pixels per cell and 2 cells per block Test Accuracy of SVC , 0.995
+Colorspace: HLS channel: ALL Using: 16 orientations 6 pixels per cell and 3 cells per block Test Accuracy of SVC , 0.99
+Colorspace: HLS channel: ALL Using: 16 orientations 10 pixels per cell and 3 cells per block Test Accuracy of SVC , 0.99
+Colorspace: HLS channel: ALL Using: 16 orientations 15 pixels per cell and 2 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 18 orientations 6 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.985
+Colorspace: HLS channel: ALL Using: 19 orientations 4 pixels per cell and 4 cells per block Test Accuracy of SVC , 0.99
+Colorspace: HLS channel: ALL Using: 19 orientations 5 pixels per cell and 1 cells per block Test Accuracy of SVC , 0.995
+Colorspace: HLS channel: ALL Using: 19 orientations 16 pixels per cell and 2 cells per block Test Accuracy of SVC , 0.985
+13083.95 Seconds to extract HOG features...
